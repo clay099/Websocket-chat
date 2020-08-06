@@ -6,7 +6,7 @@ const Room = require("./Room");
 /** ChatUser is a individual connection from client -> server to chat. */
 
 class ChatUser {
-	/** make chat: store connection-device, rooom */
+	/** make chat: store connection-device, room */
 
 	constructor(send, roomName) {
 		this._send = send; // "send" function for this user
@@ -75,6 +75,12 @@ class ChatUser {
 		);
 	}
 
+	handlePrivate(data) {
+		let arr = data.split(" ");
+		let text = arr.slice(2).join(" ");
+		this.room.privateMessage(this.name, arr[1], text);
+	}
+
 	/** Handle messages from client:
 	 *
 	 * - {type: "join", name: username} : join
@@ -88,6 +94,7 @@ class ChatUser {
 		else if (msg.type === "chat") this.handleChat(msg.text);
 		else if (msg.type === "joke") this.handleJoke();
 		else if (msg.type === "members") this.handleMembers();
+		else if (msg.type === "private") this.handlePrivate(msg.text);
 		else throw new Error(`bad message: ${msg.type}`);
 	}
 

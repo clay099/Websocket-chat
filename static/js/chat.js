@@ -27,6 +27,8 @@ ws.onmessage = function (evt) {
 		item = $(`<li><i>${msg.text}</i></li>`);
 	} else if (msg.type === "chat") {
 		item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
+	} else if (msg.type === "private") {
+		item = $(`<li><b>Private Message from${msg.name}: </b>${msg.text}</li>`);
 	} else {
 		return console.error(`bad message: ${msg}`);
 	}
@@ -57,6 +59,9 @@ $("form").submit(function (evt) {
 	}
 	if ($("#m").val() === "/members") {
 		data = { type: "members" };
+	}
+	if ($("#m").val().includes("/priv")) {
+		data = { type: "private", text: $("#m").val() };
 	}
 	ws.send(JSON.stringify(data));
 
