@@ -52,6 +52,9 @@ $("form").submit(function (evt) {
 	evt.preventDefault();
 
 	let data = { type: "chat", text: $("#m").val() };
+	if ($("#m").val() === "joke") {
+		data = { type: "joke" };
+	}
 	ws.send(JSON.stringify(data));
 
 	$("#m").val("");
