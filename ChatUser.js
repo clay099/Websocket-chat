@@ -61,15 +61,15 @@ class ChatUser {
 	/** handle a member request */
 	handleMembers() {
 		let members = this.room.members;
-		let mList = [];
+		let mArr = [];
 		// console.log(members);
 		for (let member of members) {
-			mList.push(member.name);
+			mArr.push(member.name);
 		}
 		this.send(
 			JSON.stringify({
 				type: "chat",
-				text: `In room: ${mList}`,
+				text: `In room: ${mArr}`,
 				name: "Server",
 			})
 		);
