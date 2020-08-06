@@ -58,6 +58,23 @@ class ChatUser {
 		);
 	}
 
+	/** handle a member request */
+	handleMembers() {
+		let members = this.room.members;
+		let mList = [];
+		// console.log(members);
+		for (let member of members) {
+			mList.push(member.name);
+		}
+		this.send(
+			JSON.stringify({
+				type: "chat",
+				text: `In room: ${mList}`,
+				name: "Server",
+			})
+		);
+	}
+
 	/** Handle messages from client:
 	 *
 	 * - {type: "join", name: username} : join
@@ -70,6 +87,7 @@ class ChatUser {
 		if (msg.type === "join") this.handleJoin(msg.name);
 		else if (msg.type === "chat") this.handleChat(msg.text);
 		else if (msg.type === "joke") this.handleJoke();
+		else if (msg.type === "members") this.handleMembers();
 		else throw new Error(`bad message: ${msg.type}`);
 	}
 
