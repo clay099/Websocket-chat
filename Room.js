@@ -52,6 +52,7 @@ class Room {
 		}
 	}
 
+	/**send message to one user */
 	privateMessage(from, to, msg) {
 		let toMember;
 		for (let member of this.members) {

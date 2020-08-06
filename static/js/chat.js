@@ -60,6 +60,10 @@ $("form").submit(function (evt) {
 	if ($("#m").val() === "/members") {
 		data = { type: "members" };
 	}
+	/**  expects three a string with at least 3 words. 1. /priv 2. <username> 3. any string
+	 * e.g. "/priv 2 can you see this"
+	 * the above text will send "can you see this" to someone with username "2"
+	 */
 	if ($("#m").val().includes("/priv")) {
 		data = { type: "private", text: $("#m").val() };
 	}

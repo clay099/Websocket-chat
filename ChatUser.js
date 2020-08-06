@@ -75,6 +75,7 @@ class ChatUser {
 		);
 	}
 
+    // handle private message 
 	handlePrivate(data) {
 		let arr = data.split(" ");
 		let text = arr.slice(2).join(" ");
